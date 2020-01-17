@@ -11,11 +11,10 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 */
 
 module.exports = {
+    
     async store(req, res) {
         const { github_user, techs, latitude, longitude } = req.body
         let dev = await Dev.findOne({ github_user });
-        console.log(dev);
-        console.log(github_user);
                 
         if (!dev) {
             const techsArray = parseStringAsArray(techs);
@@ -39,10 +38,28 @@ module.exports = {
 
         return res.json(dev)
     },
+    
+    async update(req, res){
+        console.log(req.params);
+        const { techs, bio, avatar, name, latitude, longitude } = req.body
+        const techsArray = parseStringAsArray(techs);
+        // check if has any user
+        
+        // body validation
+        
+        // update user
+
+        console.log(req.body);
+        return res.json({})
+    },
+
+    async show(req, res) {
+
+    },
+
     async index(req, res) {
-        
-        const devs = await Dev.find({}); 
-        
-        return res.json( devs );
+        const devs = await Dev.find({}, {})
+        return res.json(devs)
     }
+
 };

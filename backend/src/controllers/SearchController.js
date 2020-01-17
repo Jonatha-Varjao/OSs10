@@ -5,7 +5,7 @@ module.exports = {
     async index(req, res){
         // busca todos devs num raio
         // filtrar por tecnologias
-        const { latitude, longitude, techs } = req.query;
+        const { latitude, longitude, techs, maxDistance } = req.query;
         
         const techsArray = parseStringAsArray(techs);
 
@@ -19,7 +19,7 @@ module.exports = {
                         type: 'Point',
                         coordinates: [longitude, latitude],
                     },
-                    $maxDistance: 10000,
+                    $maxDistance: maxDistance,
                 },
             }
          })
